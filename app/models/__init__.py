@@ -1,5 +1,6 @@
 
-from app.models.adm import (Processos, Partes, Clientes, Classes, Foros, Varas, Juizes)
+from app.models.adm import (Processos, Partes, Clientes, Classes, 
+                            Foros, Varas, Juizes, Assuntos)
 from app.models.users import Users, Group, Permission
 
 import os

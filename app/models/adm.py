@@ -5,8 +5,9 @@ import pytz
 class Processos(db.Model):
     
     id = db.Column(db.Integer, primary_key=True, unique=True)
-    numproc = db.Column(db.String(length=64), nullable=False)
+    numproc = db.Column(db.String(length=64), nullable=False,  unique=True)
     parte_contraria = db.Column(db.String(length=64), nullable=False)
+    adv_contrario = db.Column(db.String(length=64), nullable=False)
     cliente = db.Column(db.String(length=64), nullable=False)
     assunto = db.Column(db.String(length=64), nullable=False)
     classe = db.Column(db.String(length=64), nullable=False)
@@ -33,6 +34,11 @@ class Partes(db.Model):
     telefone1 = db.Column(db.String(length=64))
     telefone2 = db.Column(db.String(length=64))
     telefone3 = db.Column(db.String(length=64))
+
+class Assuntos(db.Model):
+    
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    assunto = db.Column(db.String(length=64), nullable=False)
 
 class Classes(db.Model):
     

@@ -10,7 +10,7 @@ from app.Forms.proc_adm.defaults import bairros_manaus, cidades_amazonas
 import string
 import random
 
-from app.models import Partes
+from app.models import Partes, Clientes, Classes, Foros, Juizes, Varas, Assuntos
 
 
 class SearchProc(FlaskForm):
@@ -37,7 +37,7 @@ class ProcessoForm(FlaskForm):
     
     numproc = StringField("Número do Processo *", validators=[DataRequired()])
     auto_import = BooleanField("Importar Automaticamente dados do Processo")
-    cliente = SelectField("Cliente", choices=[("vazio", "Vazio")])
+    cliente = SelectField("Cliente", choices=[], validators=[DataRequired("Selecione o cliente do processo!")])
     parte_contraria = SelectField("Parte Contrária", choices=[("vazio", "Vazio")])
     adv_contrario = StringField("Advogado Parte Contrária")
     assunto = SelectField("Assunto", choices=[("vazio", "Vazio")])
@@ -53,6 +53,24 @@ class ProcessoForm(FlaskForm):
 
     def __init__(self, *args, **kwargs):
         super(ProcessoForm, self).__init__(*args, **kwargs)
+        
+        self.assunto.choices.extend(
+            [(Assunto.assunto, Assunto.assunto) for Assunto in Assuntos.query.all()])
+        
+        self.cliente.choices.extend(
+            [(Cliente.cliente, Cliente.cliente) for Cliente in Clientes.query.all()])
+        
+        self.classe.choices.extend(
+            [(Classe.classe, Classe.classe) for Classe in Classes.query.all()] )
+        
+        self.foro.choices.extend(
+            [(Foro.foro, Foro.foro) for Foro in Foros.query.all()])
+        
+        self.vara.choices.extend(
+            [(Vara.vara, Vara.vara) for Vara in Varas.query.all()])
+        
+        self.juiz.choices.extend(
+            [(Juiz.juiz, Juiz.juiz) for Juiz in Juizes.query.all()])
         
         parte_contrariaes = [(Parte.nome, Parte.nome) for Parte in Partes.query.all()]
         if parte_contrariaes:
