@@ -5,13 +5,13 @@ from app.routes.auth import auth
 from app.routes.dashboard import dash
 from app.routes.processos import procs
 from app.routes.partes import person
-from app.routes.empresas import company
+from app.routes.clientes import clients
 
 app.register_blueprint(person)
 app.register_blueprint(procs)
 app.register_blueprint(auth)
 app.register_blueprint(dash)
-app.register_blueprint(company)
+app.register_blueprint(clients)
 
 @app.route("/")
 def index():

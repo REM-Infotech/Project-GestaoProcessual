@@ -48,7 +48,7 @@ for paths in [DOCS_PATH, TEMP_PATH, IMAGE_TEMP_PATH, CSV_TEMP_PATH, PDF_TEMP_PAT
         
         if plataforma == "Linux":
             path =  f"{paths}/*" 
-            comand = "rm -r " + path
+            command = "rm -r " + path
              
         
         elif plataforma == "Windows":

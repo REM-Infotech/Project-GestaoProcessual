@@ -1,5 +1,5 @@
 
-from app.models.adm import (ProcsADM, Debitos, Empresas, Estados, Partes, Bairros, Cidades)
+from app.models.adm import (Processos, Partes, Clientes, Classes, Foros, Varas, Juizes)
 from app.models.users import Users, Group, Permission
 
 import os

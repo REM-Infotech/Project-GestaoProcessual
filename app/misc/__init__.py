@@ -14,12 +14,12 @@ def format_currency_brl(value) -> str:
     number = unicodedata.normalize("NFKD", number)
     return number
 
-def gerar_sigla(nome_empresa):
+def gerar_sigla(nome_cliente):
     # Palavras a serem ignoradas
     palavras_ignoradas = ["LTDA", "S/A", "EIRELI"]
 
-    # Separar o nome da empresa em palavras e filtrar as palavras a serem ignoradas
-    palavras = [palavra for palavra in nome_empresa.upper().split() if palavra not in palavras_ignoradas]
+    # Separar o nome da cliente em palavras e filtrar as palavras a serem ignoradas
+    palavras = [palavra for palavra in nome_cliente.upper().split() if palavra not in palavras_ignoradas]
 
     # Coletar as duas primeiras letras de cada palavra
     letras = [palavra[:2] for palavra in palavras if len(palavra) > 1]

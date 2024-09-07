@@ -8,7 +8,7 @@ import pathlib
 
 from app import db
 from app.misc import format_currency_brl, gerar_sigla
-from app.models import ProcsADM
+from app.models import Processos
 from app.Forms import SearchProc, ProcessoForm
 
 
@@ -30,11 +30,11 @@ def consulta():
 
     title = "Processos"
     form = SearchProc()
-    database = ProcsADM.query.all()
+    database = Processos.query.all()
     if form.validate_on_submit():
 
-        coluna = getattr(ProcsADM, form.tipoBusca.data)
-        database = ProcsADM.query.filter(coluna.contains(form.campo_busca.data)).all()
+        coluna = getattr(Processos, form.tipoBusca.data)
+        database = Processos.query.filter(coluna.contains(form.campo_busca.data)).all()
 
     page = "processos.html"
     return render_template("index.html", page=page, database=database, 
@@ -52,22 +52,21 @@ def cadastro():
     func = "Cadastro"
     title = "Processos"
     
+    error_messages = None
+    
     action_url = url_for('procs.cadastro')
     
     if form.validate_on_submit():
 
-        check_proc = ProcsADM.query.filter_by(
+        check_proc = Processos.query.filter_by(
             numproc=form.numproc.data).first()
         if not check_proc:
 
             data: dict[str, str] = {}
-            for coluna in ProcsADM.__table__.columns:
+            for coluna in Processos.__table__.columns:
 
                 info_data = form.data.get(coluna.name, None)
                 if info_data:
-                    
-                    if coluna.name == "numproc":
-                        info_data = f"{info_data}-{gerar_sigla(form.empresa.data)}"
                     
                     if isinstance(coluna.type, Float):
                         info_data = info_data.encode(
@@ -77,7 +76,7 @@ def cadastro():
 
                     data.update({coluna.name: info_data})
 
-            Processo = ProcsADM(**data)
+            Processo = Processos(**data)
             db.session.add(Processo)
             db.session.commit()
 
@@ -87,8 +86,16 @@ def cadastro():
         flash("Processo já cadastrado!", "error")
         return redirect(url_for("procs.consulta"))
 
+    if form.errors:
+        error_messages = []
+        for message in form.errors:
+            msg = form.errors[message]
+            for mensagem in msg:
+                error_messages.append((message, mensagem))
+    
     return render_template("index.html", page=page, form=form,
-                           title=title, func=func, action_url=action_url)
+                           title=title, func=func, 
+                           action_url=action_url, error_messages=error_messages)
 
 
 @procs.route("/processos/detalhes/<id>", methods=["GET"])
@@ -107,7 +114,8 @@ def editar(id: int):
     func = "Editar"
     title = "Processos"
     action_url = url_for('procs.editar', id=id)
-    dbase = ProcsADM.query.filter_by(id=id).first()
+    dbase = Processos.query.filter_by(id=id).first()
+    error_messages = None
     
     data: dict[str, str] = {}
     for column in dbase.__table__.columns:
@@ -140,8 +148,17 @@ def editar(id: int):
         flash("Alterações salvas com sucesso!", "success")
         return redirect(url_for("procs.consulta"))
         
+    if form.errors:
+        error_messages = []
+        for message in form.errors:
+            msg = form.errors[message]
+            for mensagem in msg:
+                error_messages.append((message, mensagem))
+    
     return render_template("index.html", page=page, form=form,
-                           title=title, func=func, action_url=action_url)
+                           title=title, func=func, 
+                           action_url=action_url, error_messages=error_messages)
+
 
 
 @procs.route("/processos/desabilitar/<id>", methods=["POST"])

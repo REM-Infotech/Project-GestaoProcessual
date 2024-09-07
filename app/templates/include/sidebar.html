@@ -46,16 +46,6 @@
                             </div>
                             <span class="text">Prazos</span>
                         </a>
-
-                        <a href="#" class="nav-link ">
-                            <div class="sb-nav-link-icon">
-                                <span class="icon text-white-50">
-                                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                                </span>
-                            </div>
-                            <span class="text">Débitos</span>
-
-                        </a>
                     </nav>
                 </div>
 
@@ -79,14 +69,14 @@
                             </div>
                             <span class="text">Pessoas</span>
                         </a>
-                        <a class="nav-link" href="{{ url_for('company.consulta') }}">
+                        <a class="nav-link" href="{{ url_for('clients.consulta') }}">
 
                             <div class="sb-nav-link-icon">
                                 <span class="icon text-white-50">
-                                    <i class="fa-solid fa-building"></i>
+                                    <i class="fa-solid fa-users"></i>
                                 </span>
                             </div>
-                            <span class="text">Empresas</span>
+                            <span class="text">Clientes</span>
                         </a>
                     </nav>
                 </div>
@@ -95,7 +85,7 @@
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLocalizacao"
                     aria-expanded="false" aria-controls="collapseLocalizacao">
                     <div class="sb-nav-link-icon"><i class="fa-solid fa-location-dot"></i></div>
-                    Localização
+                    Judiciário
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapseLocalizacao" aria-labelledby="headingOne"
@@ -104,10 +94,10 @@
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <span class="icon text-white-50">
-                                    <i class="fa-solid fa-signs-post"></i>
+                                    <i class="fa-solid fa-building-columns"></i>
                                 </span>
                             </div>
-                            <span class="text">Bairros</span>
+                            <span class="text">Foros</span>
                         </a>
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
@@ -115,15 +105,15 @@
                                     <i class="fa-solid fa-city"></i>
                                 </span>
                             </div>
-                            <span class="text">Cidades</span>
+                            <span class="text">Varas</span>
                         </a>
                         <a class="nav-link" href="#">
                             <div class="sb-nav-link-icon">
                                 <span class="icon text-white-50">
-                                    <i class="fa-solid fa-flag-usa"></i>
+                                    <i class="fa-solid fa-pen-clip"></i>
                                 </span>
                             </div>
-                            <span class="text">Estados</span>
+                            <span class="text">Juízes</span>
                         </a>
                     </nav>
                 </div>
@@ -138,10 +128,8 @@
                 <div class="collapse" id="collapseAutomate" aria-labelledby="headingOne"
                     data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="#">Envio SMS</a>
-                        <a class="nav-link" href="#">Envio Email</a>
-                        <a class="nav-link" href="#">Envio WhatsApp</a>
-                        <a class="nav-link" href="#">Envio Telegram</a>
+                        <a class="nav-link" href="#">Buscar Prazos</a>
+
                     </nav>
                 </div>
 

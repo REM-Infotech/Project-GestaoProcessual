@@ -4,51 +4,51 @@ import os
 import pathlib
 
 from app import db
-from app.models import Empresas
-from app.Forms import EmpresaForm
+from app.models import Clientes
+from app.Forms import clienteForm
 from app.misc import formatar_numero
 
 path_templates = os.path.join(pathlib.Path(__file__).parent.resolve(), 
                               "templates")
-company = Blueprint("company", __name__,  template_folder=path_templates)
+clients = Blueprint("clients", __name__,  template_folder=path_templates)
 
-@company.route("/empresas", methods = ["GET"])
+@clients.route("/clientes", methods = ["GET"])
 @login_required
 def index():
     
-    return redirect(url_for("company.consulta"))
+    return redirect(url_for("clients.consulta"))
 
-@company.route("/empresas/consulta", methods = ["GET", "POST"])
+@clients.route("/clientes/consulta", methods = ["GET", "POST"])
 @login_required
 def consulta():
     
-    title = "Empresas"
-    page = "empresas.html"
+    title = "Clientes"
+    page = "clientes.html"
     
-    database = Empresas.query.all()
+    database = Clientes.query.all()
     
     return render_template("index.html", page=page, 
                            title=title, database=database)
 
-@company.route("/empresas/cadastro", methods = ["GET", "POST"])
+@clients.route("/clientes/cadastro", methods = ["GET", "POST"])
 @login_required
 def cadastro():
     
-    title = "Empresas"
+    title = "Clientes"
     func = "Cadastro"
-    page = "Formempresas.html"
-    url_action = url_for("company.cadastro")
-    form = EmpresaForm()
+    page = "Formclientes.html"
+    url_action = url_for("clients.cadastro")
+    form = clienteForm()
     
     if form.validate_on_submit():
 
-        check_Empresa = Empresas.query.filter(
-            Empresas.cnpj == form.cnpj.data).first()
+        check_cliente = Clientes.query.filter(
+            Clientes.cpf_cnpj == form.cpf_cnpj.data).first()
         
-        if not check_Empresa:
+        if not check_cliente:
 
             data: dict[str, str] = {}
-            for coluna in Empresas.__table__.columns:
+            for coluna in Clientes.__table__.columns:
 
                 form_field = getattr(form, f"{coluna.name.lower()}", None)
                 if form_field:
@@ -64,38 +64,38 @@ def cadastro():
                         
                     data.update({coluna.name: data_insert})
                     
-            Empresa = Empresas(**data)
-            db.session.add(Empresa)
+            cliente = Clientes(**data)
+            db.session.add(cliente)
             db.session.commit()
 
-            flash("Empresa cadastrada com sucesso!", "success")
-            return redirect(url_for("company.consulta"))
+            flash("cliente cadastrada com sucesso!", "success")
+            return redirect(url_for("clients.consulta"))
 
-        flash("Empresa já cadastrada!", "error")
+        flash("cliente já cadastrada!", "error")
     
     return render_template("index.html", page=page, title=title, 
                            func=func, url_action=url_action, form=form)
 
-@company.route("/empresas/editar/<id>", methods = ["GET", "POST"])
+@clients.route("/clientes/editar/<id>", methods = ["GET", "POST"])
 @login_required
 def editar(id: int):
     
-    title = "Empresas"
+    title = "Clientes"
     func = "Editar"
-    page = "Formempresas.html"
-    url_action = url_for("company.editar", id=id)
+    page = "Formclientes.html"
+    url_action = url_for("clients.editar", id=id)
     
-    dbase = Empresas.query.filter(Empresas.id == id).first()
+    dbase = Clientes.query.filter(Clientes.id == id).first()
     
     data: dict[str, str] = {}
     for column in dbase.__table__.columns:
         
-        form_field = getattr(EmpresaForm(), f"{column.name.lower()}", None)
+        form_field = getattr(clienteForm(), f"{column.name.lower()}", None)
         if form_field:
             set_data = getattr(dbase, column.name)
             data.update({column.name: set_data})
     
-    form = EmpresaForm(**data)
+    form = clienteForm(**data)
     if form.validate_on_submit():
         
         for column in dbase.__table__.columns:
@@ -115,7 +115,7 @@ def editar(id: int):
                 
         db.session.commit()
         flash("Alterações salvas com sucesso!", "success")
-        return redirect(url_for("company.consulta"))
+        return redirect(url_for("clients.consulta"))
     
     return render_template("index.html", page=page, title=title, 
                            func=func, url_action=url_action, form=form)

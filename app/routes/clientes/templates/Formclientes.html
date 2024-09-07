@@ -5,16 +5,16 @@
         </div>
         <div class="card-body">
             <div class="container">
-                <form action="{{ action_url }}" method="post" name="CadastroEmpresas">
+                <form action="{{ action_url }}" method="post" name="Cadastroclientes">
                     {{ form.hidden_tag() }}
                     <div class="row g-3 bg-primary bg-opacity-25 rounded justify-content-center p-3">
                         <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.empresa.label(class="form-label") }}
-                            {{ form.empresa(class="form-control", placeholder=form.empresa.label.text) }}
+                            {{ form.cliente.label(class="form-label") }}
+                            {{ form.cliente(class="form-control", placeholder=form.cliente.label.text) }}
                         </div>
                         <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.cnpj.label(class="form-label") }}
-                            {{ form.cnpj(class="form-control", placeholder=form.cnpj.label.text, oninput="formatarComoCNPJ(this)") }}
+                            {{ form.cpf_cnpj.label(class="form-label") }}
+                            {{ form.cpf_cnpj(class="form-control", placeholder=form.cpf_cnpj.label.text, oninput="formatarComoCNPJouCPF(this)") }}
                         </div>
                         <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.endereco.label(class="form-label") }}

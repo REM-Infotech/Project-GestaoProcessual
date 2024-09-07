@@ -5,52 +5,91 @@
         </div>
         <div class="card-body">
             <div class="container">
+                {% if error_messages %}
+                {% for message, mensagem in error_messages %}
+                <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                    <strong>Erro: </strong>{{ message }} - {{ mensagem }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% endif %}
                 <form action="{{ action_url }}" method="post" name="CadastroProcesso">
-                    <div class="row g-3 bg-primary bg-opacity-25 rounded justify-content-center p-3">
+                    <div class="row mt-2 g-3 bg-primary bg-opacity-25 rounded justify-content-center p-3">
                         {{ form.hidden_tag() }}
 
-                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.numproc.label(class="form-label") }}
                             {{ form.numproc(class="form-control", placeholder=form.numproc.label.text) }}
+                            <div class="form-check m-2">
+                                {{ form.auto_import(class="form-check-input") }}
+                                {{ form.auto_import.label(class="form-check-label", for=form.auto_import.id) }}
+                            </div>
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.devedor.label(class="form-label") }}
-                            {{ form.devedor(**{"class":"form-control", "data-placeholder":form.devedor.label.text})}}
+                        <div
+                            class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.cliente.label(class="form-label") }}
+                            {{ form.cliente(**{"class":"form-control", "data-placeholder":form.cliente.label.text}) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.empresa.label(class="form-label") }}
-                            {{ form.empresa(**{"class":"form-control", "data-placeholder":form.empresa.label.text}) }}
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.parte_contraria.label(class="form-label") }}
+                            {{ form.parte_contraria(**{"class":"form-control",
+                            "data-placeholder":form.parte_contraria.label.text})}}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.uc_contrato.label(class="form-label") }}
-                            {{ form.uc_contrato(class="form-control", placeholder=form.uc_contrato.label.text)}}
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.adv_contrario.label(class="form-label") }}
+                            {{ form.adv_contrario(class="form-control", placeholder=form.adv_contrario.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.endereco_debto.label(class="form-label") }}
-                            {{ form.endereco_debto(class="form-control", placeholder=form.endereco_debto.label.text)}}
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.assunto.label(class="form-label") }}
+                            {{ form.assunto(class="form-control", placeholder=form.assunto.label.text) }}
                         </div>
-                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.bairro.label(class="form-label") }}
-                            {{ form.bairro(**{"class":"form-control", "data-placeholder":form.bairro.label.text}) }}
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.classe.label(class="form-label") }}
+                            {{ form.classe(class="form-control", placeholder=form.classe.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.cidade.label(class="form-label") }}
-                            {{ form.cidade(**{"class":"form-control", "data-placeholder":form.cidade.label.text}) }}
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.foro.label(class="form-label") }}
+                            {{ form.foro(class="form-control", placeholder=form.foro.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.estado.label(class="form-label") }}
-                            {{ form.estado(**{"class":"form-control", "data-placeholder":form.estado.label.text}) }}
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.vara.label(class="form-label") }}
+                            {{ form.vara(class="form-control", placeholder=form.vara.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
-                            {{ form.valor_total.label(class="form-label") }}
-                            {{ form.valor_total(class="form-control", placeholder=form.valor_total.label.text, 
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.juiz.label(class="form-label") }}
+                            {{ form.juiz(class="form-control", placeholder=form.juiz.label.text) }}
+                        </div>
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.area.label(class="form-label") }}
+                            {{ form.area(class="form-control", placeholder=form.area.label.text) }}
+                        </div>
+                        <div
+                            class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.valor_causa.label(class="form-label") }}
+                            {{ form.valor_causa(class="form-control", placeholder=form.valor_causa.label.text,
                             oninput="formatarComoMoeda(this)") }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.data_cadastro.label(class="form-label") }}
-                            {{ form.data_cadastro(class="form-control", placeholder=form.data_cadastro.label.text, disabled=True) }}
+                            {{ form.data_cadastro(class="form-control", placeholder=form.data_cadastro.label.text,
+                            disabled=True) }}
                         </div>
-                        
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.data_distribuicao.label(class="form-label") }}
+                            {{ form.data_distribuicao(class="form-control",
+                            placeholder=form.data_distribuicao.label.text) }}
+                        </div>
                     </div>
                     <hr>
                     <div class="d-grid gap-2 mb-3">

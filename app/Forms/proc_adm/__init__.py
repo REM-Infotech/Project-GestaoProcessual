@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SubmitField, SelectField, EmailField
+from wtforms import (StringField, DateField, SubmitField, 
+                     SelectField, EmailField, BooleanField)
 from wtforms.validators import DataRequired
 
 import pytz
@@ -9,7 +10,7 @@ from app.Forms.proc_adm.defaults import bairros_manaus, cidades_amazonas
 import string
 import random
 
-from app.models import ProcsADM, Bairros, Cidades, Estados, Empresas, Partes
+from app.models import Partes
 
 
 class SearchProc(FlaskForm):
@@ -22,8 +23,8 @@ class SearchProc(FlaskForm):
         super(SearchProc, self).__init__(*args, **kwargs)
         self.tipoBusca.choices = [
             ("numproc", "Número do Processo"),
-            ("devedor", "Devedor"),
-            ("empresa", "Empresa"),
+            ("parte_contraria", "Parte Contrária"),
+            ("cliente", "Cliente"),
             ("uc", "Unidade Consumidora"),
             ("bairro", "Bairro"),
             ("cidade", "Cidade"),
@@ -34,40 +35,28 @@ class SearchProc(FlaskForm):
     
 class ProcessoForm(FlaskForm):
     
-    numproc = StringField("Número do Processo", validators=[DataRequired()])
-    devedor = SelectField("Devedor", choices=[])
-    empresa = SelectField("Empresa", choices=[])
-    uc_contrato = StringField("Unidade Consumidora / Contrato")
-    endereco_debto = StringField("Endereço Débito")
-    bairro = SelectField("Bairro", choices=bairros_manaus)
-    cidade = SelectField("Cidade", choices=[])
-    estado = SelectField("Estado", choices=[("Amazonas", "Amazonas")])
-    valor_total = StringField("Valor total débitos")
+    numproc = StringField("Número do Processo *", validators=[DataRequired()])
+    auto_import = BooleanField("Importar Automaticamente dados do Processo")
+    cliente = SelectField("Cliente", choices=[("vazio", "Vazio")])
+    parte_contraria = SelectField("Parte Contrária", choices=[("vazio", "Vazio")])
+    adv_contrario = StringField("Advogado Parte Contrária")
+    assunto = SelectField("Assunto", choices=[("vazio", "Vazio")])
+    classe = SelectField("Classe", choices=[("vazio", "Vazio")])
+    foro = SelectField("Foro", choices=[("vazio", "Vazio")])
+    vara = SelectField("Vara", choices=[("vazio", "Vazio")])
+    juiz = SelectField("Juiz", choices=[("vazio", "Vazio")])
+    area = StringField("Área")
+    valor_causa = StringField("Valor da Causa")
+    data_distribuicao = DateField("Data Distribuição")
     data_cadastro = DateField("Data Cadastro", default=datetime.now(pytz.timezone('Etc/GMT+4')).date())
     submit = SubmitField("Salvar")
 
     def __init__(self, *args, **kwargs):
         super(ProcessoForm, self).__init__(*args, **kwargs)
-
-        numproc = kwargs.get("numproc", None)
-        while not numproc:
-            
-            check_num = ProcsADM.query.filter_by(numproc=numproc).first()
-            if not check_num:
-                numproc = f"{''.join(random.choices(string.digits, k=6))}"
         
-        self.numproc.data = numproc
-        self.bairro.choices.extend(bairros_manaus)
-        self.cidade.choices.extend(cidades_amazonas)
-        
-        empresa = [(Empresa.empresa, Empresa.empresa) for Empresa in Empresas.query.all()]
-        self.empresa.choices.extend(empresa)
-        
-        devedores = [(Parte.nome, Parte.nome) for Parte in Partes.query.all()]
-        if devedores:
-            self.devedor.choices.extend(devedores)
-        
-        # self.estado.choices.extend([(Estados.estado, Estados.estado) for Estados in Estados.query.all()])
+        parte_contrariaes = [(Parte.nome, Parte.nome) for Parte in Partes.query.all()]
+        if parte_contrariaes:
+            self.parte_contraria.choices.extend(parte_contrariaes)
 
 class PessoaForm(FlaskForm):
     
@@ -87,10 +76,10 @@ class PessoaForm(FlaskForm):
     def __init__(self, *args, **kwargs):
         super(PessoaForm, self).__init__(*args, **kwargs)
     
-class EmpresaForm(FlaskForm):
+class clienteForm(FlaskForm):
     
-    empresa = StringField("Nome Empresa *", validators=[DataRequired()])
-    cnpj = StringField("CNPJ *", validators=[DataRequired()])
+    cliente = StringField("Nome cliente *", validators=[DataRequired()])
+    cpf_cnpj = StringField("CPF/CNPJ *", validators=[DataRequired()])
     endereco = StringField("Endereço")
     cidade = StringField("Cidade")
     estado = StringField("Estado")
@@ -102,4 +91,4 @@ class EmpresaForm(FlaskForm):
     submit = SubmitField("Salvar")
 
     def __init__(self, *args, **kwargs):
-        super(EmpresaForm, self).__init__(*args, **kwargs)
+        super(clienteForm, self).__init__(*args, **kwargs)
