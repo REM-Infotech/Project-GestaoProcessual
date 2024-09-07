@@ -1,0 +1,37 @@
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="#" id="sidebarToggle">
+        <img class="fs-4" src="{{ url_for('static', filename = 'assets/img/favicon.ico') }}" alt="Logo" width="30"
+            height="30" class="d-inline-block align-text-top">
+        CrawJUD Cobranças
+        <i class="fas fa-bars"></i>
+    </a>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Buscar processo..." aria-label="Buscar processo..."
+                aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-3 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/robotz213.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>{{ session["nome_usuario"] }}</strong>
+            </a>
+            
+            <ul class="dropdown-menu dropdown-menu-end mt-2" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="{{ url_for('auth.logout') }}">Sign out</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>

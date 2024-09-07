@@ -1,0 +1,63 @@
+<div class="container-fluid px-4">
+    <div class="card mt-4 mb-4">
+        <div class="card-header mb-3">
+            <h1 class="m-3">{{ title }} - {{ func }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <form action="{{ action_url }}" method="post" name="CadastroProcesso">
+                    <div class="row g-3 bg-primary bg-opacity-25 rounded justify-content-center p-3">
+                        {{ form.hidden_tag() }}
+
+                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.numproc.label(class="form-label") }}
+                            {{ form.numproc(class="form-control", placeholder=form.numproc.label.text) }}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.devedor.label(class="form-label") }}
+                            {{ form.devedor(**{"class":"form-control", "data-placeholder":form.devedor.label.text})}}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.empresa.label(class="form-label") }}
+                            {{ form.empresa(**{"class":"form-control", "data-placeholder":form.empresa.label.text}) }}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.uc_contrato.label(class="form-label") }}
+                            {{ form.uc_contrato(class="form-control", placeholder=form.uc_contrato.label.text)}}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.endereco_debto.label(class="form-label") }}
+                            {{ form.endereco_debto(class="form-control", placeholder=form.endereco_debto.label.text)}}
+                        </div>
+                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.bairro.label(class="form-label") }}
+                            {{ form.bairro(**{"class":"form-control", "data-placeholder":form.bairro.label.text}) }}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.cidade.label(class="form-label") }}
+                            {{ form.cidade(**{"class":"form-control", "data-placeholder":form.cidade.label.text}) }}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.estado.label(class="form-label") }}
+                            {{ form.estado(**{"class":"form-control", "data-placeholder":form.estado.label.text}) }}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.valor_total.label(class="form-label") }}
+                            {{ form.valor_total(class="form-control", placeholder=form.valor_total.label.text, 
+                            oninput="formatarComoMoeda(this)") }}
+                        </div>
+                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                            {{ form.data_cadastro.label(class="form-label") }}
+                            {{ form.data_cadastro(class="form-control", placeholder=form.data_cadastro.label.text, disabled=True) }}
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="d-grid gap-2 mb-3">
+                        {{ form.submit(class="fst-italic fs-5 btn btn-success fw-bold") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

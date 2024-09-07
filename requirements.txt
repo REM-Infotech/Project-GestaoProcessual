@@ -1,0 +1,13 @@
+iso3166
+flask
+flask-login
+flask-sqlalchemy
+flask-talisman
+flask-cloudflared
+flask-wtf
+flask-mysqldb
+python-dotenv
+pytz
+babel
+bcrypt
+phonenumbers

@@ -1,0 +1,90 @@
+<div class="container-fluid px-4">
+    <div class="card mt-4 mb-3">
+        <div class="card-header mb-3">
+            <h1 class="mb-3">{{ title }}</h1>
+            <hr>
+            <a href="{{ url_for('company.cadastro') }}" class="btn btn-success mb-3">
+                <span class="icon text-white-50">
+                    <i class="fa-solid fa-plus"></i>
+                </span>
+                <span class="text">Cadastrar</span>
+            </a>
+            <button type="button" data-bs-toggle="modal" class="btn btn-warning mb-3" data-bs-target="#importarquivo">
+                <span class="icon text-white-50">
+                    <i class="fa-solid fa-file-import"></i>
+                </span>
+                <span class="text">Import em lotes</span>
+            </button>
+            <a href="#" class="btn btn-primary mb-3">
+                <span class="icon text-white-50">
+                    <i class="fa-solid fa-file-csv"></i>
+                </span>
+                <span class="text">Gerar Relatório</span>
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+
+                <div class="col-md-12">
+                    
+                </div>
+                <hr>
+                <div class="col-md-12">
+                    <div class="table-responsive mb-3">
+                        <table class="table table-striped" id="DataTable">
+                            <thead>
+                                <tr role="row">
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>CNPJ</th>
+                                    <th>E-mail</th>
+                                    <th>Contato 1</th>
+                                    <th data-sortable="false">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if database %}
+                                {% for item in database %}
+                                <tr>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.empresa }}</td>
+                                    <td>{{ item.cnpj }}</td>
+                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.telefone1 }}</td>
+                                    <td>
+                                        <button type="button" id="DeleteEpiButton" class="btn btn-danger btn-sm mb-2"
+                                            hx-post="#!" hx-trigger="click" hx-target="#results">
+                                            <span class="icon text-white-50">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </span>
+                                            <span class="text">Deletar</span>
+                                        </button>
+                                        <a href="{{ url_for('company.editar', id=item.id) }}"
+                                            class="btn btn-warning btn-sm mb-2">
+                                            <span class="icon text-white-50">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </span>
+                                            <span class="text">Editar</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% endif %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>CNPJ</th>
+                                    <th>E-mail</th>
+                                    <th>Contato 1</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
