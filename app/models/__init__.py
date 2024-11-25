@@ -59,5 +59,5 @@ def init_database(app: Flask, db: SQLAlchemy) -> str:
 
         db.session.add(usr)
         db.session.commit()
-        
+
     return f" * Root Pw: {root_pw}"
