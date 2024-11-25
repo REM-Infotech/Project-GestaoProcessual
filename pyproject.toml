@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "project-gestaoprocessual"
+version = "0.1.0"
+description = ""
+authors = ["Robotz213 <nicholas@robotz.dev>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.7"
+iso3166 = "^2.1.1"
+flask = "^3.1.0"
+flask-login = "^0.6.3"
+flask-sqlalchemy = "^3.1.1"
+flask-talisman = "^1.1.0"
+flask-cloudflared = "^0.0.14"
+flask-wtf = "^1.2.2"
+python-dotenv = "^1.0.1"
+pytz = "^2024.2"
+babel = "^2.16.0"
+bcrypt = "^4.2.1"
+phonenumbers = "^8.13.50"
+eventlet = "^0.38.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

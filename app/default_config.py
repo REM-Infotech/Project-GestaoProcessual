@@ -1,35 +1,35 @@
-from dotenv import load_dotenv
-from uuid import uuid4
-import platform
 import os
-
+import shutil
 from datetime import timedelta
+from pathlib import Path
+from uuid import uuid4
 
-load_dotenv()
+from dotenv import dotenv_values
 
-login_db = os.getenv('login')
-passwd_db = os.getenv('password')
-host_db = os.getenv('host')
-database_name = os.getenv('database')
+values = dotenv_values(os.path.join(os.getcwd(), ".env"))
 
-## PARAMETROS PARA O APP FLASK
+login_db = values.get("login")
+passwd_db = values.get("password")
+host_db = values.get("host")
+database_name = values.get("database")
+
+# PARAMETROS PARA O APP FLASK
 PDF_PATH = os.path.join(os.getcwd(), "PDF")
 DOCS_PATH = os.path.join(os.getcwd(), "Docs")
 TEMP_PATH = os.path.join(os.getcwd(), "Temp")
 IMAGE_TEMP_PATH = os.path.join(TEMP_PATH, "IMG")
 CSV_TEMP_PATH = os.path.join(TEMP_PATH, "csv")
 PDF_TEMP_PATH = os.path.join(TEMP_PATH, "pdf")
+DEBUG = True
 
-debug = os.getenv('DEBUG', 'False').lower() in (
-        'true', '1', 't', 'y', 'yes')
+# database_uri = f"mysql://{login_db}:{passwd_db}@{host_db}/{database_name}"
+# if debug is True:
+#     database_uri = "sqlite:///project.db"
 
-database_uri = f"mysql://{login_db}:{passwd_db}@{host_db}/{database_name}"
-if debug is True:
-    database_uri = "sqlite:///project.db"
-
+database_uri = "sqlite:///project.db"
 SQLALCHEMY_DATABASE_URI = database_uri
 
-SQLALCHEMY_TRACK_MODIFICATIONS = False   
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 PREFERRED_URL_SCHEME = "https"
 SESSION_COOKIE_HTTPONLY = False
 SESSION_COOKIE_SECURE = True
@@ -38,23 +38,10 @@ SRC_IMG_PATH = os.path.join(os.getcwd(), "app", "src", "assets", "img")
 SECRET_KEY = str(uuid4())
 
 for paths in [DOCS_PATH, TEMP_PATH, IMAGE_TEMP_PATH, CSV_TEMP_PATH, PDF_TEMP_PATH]:
-    
-    if not os.path.exists(paths):
-        os.makedirs(paths, exist_ok=True)
-        
-    else:
-        
-        plataforma = platform.system()
-        
-        if plataforma == "Linux":
-            path =  f"{paths}/*" 
-            command = "rm -r " + path
-             
-        
-        elif plataforma == "Windows":
-            path =  f"{paths}\\*" 
-            command = "powershell rm -r " + path
-        
-        os.system(command)
 
+    path_folder = Path(paths)
 
+    if path_folder.exists():
+        shutil.rmtree(str(path_folder))
+
+    path_folder.mkdir(exist_ok=True)

@@ -32,9 +32,13 @@ MANIFEST
 *.manifest
 *.spec
 
+.vscode/
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+
+is_init.txt
 
 # Unit test / coverage reports
 htmlcov/
