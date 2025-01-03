@@ -1,18 +1,17 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_required
-
-from datetime import datetime
-from dotenv import dotenv_values
-import requests
-from sqlalchemy import Float
 import os
 import pathlib
+from datetime import datetime
+
+import httpx as requests
+from dotenv import dotenv_values
+from flask import Blueprint, flash, redirect, render_template, url_for
+from flask_login import login_required
+from sqlalchemy import Float
 
 from app import db
+from app.forms import ProcessoForm, SearchProc
 from app.misc import format_currency_brl
-from app.models import Processos, Juizes, Classes, Foros, Varas, Partes, Assuntos
-from app.Forms import SearchProc, ProcessoForm
-
+from app.models import Assuntos, Classes, Foros, Juizes, Partes, Processos, Varas
 
 path_templates = os.path.join(pathlib.Path(__file__).parent.resolve(), "templates")
 
@@ -71,7 +70,7 @@ def cadastro():
             if form.auto_import.data is True:
 
                 url_api = dotenv_values().get("API_URL")
-                data_import = requests.get(f"{url_api}/{form.numproc.data}")
+                data_import = requests.get(f"{url_api}/{form.numproc.data}", timeout=60)
 
                 if data_import.status_code == 200:
 

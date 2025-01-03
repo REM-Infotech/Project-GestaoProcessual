@@ -1,14 +1,14 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_required
 import os
 import pathlib
+from typing import Type
+
+from flask import Blueprint, flash, redirect, render_template, url_for
+from flask_login import login_required
 
 from app import db
-from typing import Type
-from app.models import Partes
-from app.Forms import PessoaForm
+from app.forms import PessoaForm
 from app.misc import formatar_numero
-
+from app.models import Partes
 
 path_templates = os.path.join(pathlib.Path(__file__).parent.resolve(), "templates")
 person = Blueprint("person", __name__, template_folder=path_templates)

@@ -1,21 +1,22 @@
-<div class="container-fluid px-4">
+<div class="container px-4">
     <div class="card mt-4 mb-3">
         <div class="card-header mb-3">
             <h1 class="mb-3">{{ title }}</h1>
             <hr>
-            <a href="{{ url_for('clients.cadastro') }}" class="btn btn-success mb-3">
+            <a href="{{ url_for('clients.cadastro') }}" class="btn btn-success btn-icon-split m-1">
                 <span class="icon text-white-50">
                     <i class="fa-solid fa-plus"></i>
                 </span>
                 <span class="text">Cadastrar</span>
             </a>
-            <button type="button" data-bs-toggle="modal" class="btn btn-warning mb-3" data-bs-target="#importarquivo">
+            <button type="button" data-bs-toggle="modal" class="btn btn-secondary btn-icon-split m-1"
+                data-bs-target="#importarquivo">
                 <span class="icon text-white-50">
                     <i class="fa-solid fa-file-import"></i>
                 </span>
                 <span class="text">Import em lotes</span>
             </button>
-            <a href="#" class="btn btn-primary mb-3">
+            <a href="#" class="btn btn-primary btn-icon-split m-1">
                 <span class="icon text-white-50">
                     <i class="fa-solid fa-file-csv"></i>
                 </span>
@@ -26,7 +27,7 @@
             <div class="row g-3">
 
                 <div class="col-md-12">
-                    
+
                 </div>
                 <hr>
                 <div class="col-md-12">
@@ -52,15 +53,16 @@
                                     <td>{{ item.email }}</td>
                                     <td>{{ item.telefone1 }}</td>
                                     <td>
-                                        <button type="button" id="DeleteEpiButton" class="btn btn-danger btn-sm mb-2"
-                                            hx-post="#!" hx-trigger="click" hx-target="#results">
+                                        <button type="button" id="DeleteEpiButton"
+                                            class="btn btn-danger btn-icon-split btn-sm mb-2" hx-post="#!"
+                                            hx-trigger="click" hx-target="#results">
                                             <span class="icon text-white-50">
                                                 <i class="fa-solid fa-trash"></i>
                                             </span>
                                             <span class="text">Deletar</span>
                                         </button>
                                         <a href="{{ url_for('clients.editar', id=item.id) }}"
-                                            class="btn btn-warning btn-sm mb-2">
+                                            class="btn btn-danger btn-icon-split btn-sm mb-2">
                                             <span class="icon text-white-50">
                                                 <i class="fa-solid fa-pen"></i>
                                             </span>

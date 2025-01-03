@@ -1,12 +1,13 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_required
 import os
 import pathlib
 
+from flask import Blueprint, flash, redirect, render_template, url_for
+from flask_login import login_required
+
 from app import db
-from app.models import Clientes
-from app.Forms import clienteForm
+from app.forms import clienteForm
 from app.misc import formatar_numero
+from app.models import Clientes
 
 path_templates = os.path.join(pathlib.Path(__file__).parent.resolve(), "templates")
 clients = Blueprint("clients", __name__, template_folder=path_templates)

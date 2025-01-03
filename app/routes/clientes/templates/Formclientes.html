@@ -1,4 +1,4 @@
-<div class="container-fluid px-4">
+<div class="container px-4">
     <div class="card mt-4 mb-4">
         <div class="card-header mb-3">
             <h1 class="m-3">{{ title }} - {{ func }}</h1>
@@ -8,43 +8,53 @@
                 <form action="{{ action_url }}" method="post" name="Cadastroclientes">
                     {{ form.hidden_tag() }}
                     <div class="row g-3 bg-primary bg-opacity-25 rounded justify-content-center p-3">
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.cliente.label(class="form-label") }}
                             {{ form.cliente(class="form-control", placeholder=form.cliente.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.cpf_cnpj.label(class="form-label") }}
                             {{ form.cpf_cnpj(class="form-control", placeholder=form.cpf_cnpj.label.text, oninput="formatarComoCNPJouCPF(this)") }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.endereco.label(class="form-label") }}
                             {{ form.endereco(class="form-control", placeholder=form.endereco.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.cep.label(class="form-label") }}
                             {{ form.cep(class="form-control", placeholder=form.cep.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.cidade.label(class="form-label") }}
                             {{ form.cidade(class="form-control", placeholder=form.cidade.label.text) }}
                         </div>
-                        <div class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-md-5 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.estado.label(class="form-label") }}
                             {{ form.estado(class="form-control", placeholder=form.estado.label.text) }}
                         </div>
-                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.email.label(class="form-label") }}
                             {{ form.email(class="form-control", placeholder=form.email.label.text) }}
                         </div>
-                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.telefone1.label(class="form-label") }}
                             {{ form.telefone1(class="form-control", placeholder=form.telefone1.label.text) }}
                         </div>
-                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.telefone2.label(class="form-label") }}
                             {{ form.telefone2(class="form-control", placeholder=form.telefone2.label.text) }}
                         </div>
-                        <div class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
+                        <div
+                            class="col-10 mb-3 border border-secondary p-2 border-2 rounded bg-secondary bg-opacity-25">
                             {{ form.telefone3.label(class="form-label") }}
                             {{ form.telefone3(class="form-control", placeholder=form.telefone3.label.text) }}
                         </div>

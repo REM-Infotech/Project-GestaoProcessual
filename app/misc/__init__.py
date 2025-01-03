@@ -1,13 +1,15 @@
 import unicodedata
-from iso3166 import countries
+
 import babel.numbers as numbers
+from iso3166 import countries
+from phonenumbers import (
+    PhoneNumberFormat,
+    country_code_for_region,
+    format_number,
+    parse,
+)
 
 # from babel.dates import format_date
-
-from phonenumbers import parse
-from phonenumbers import PhoneNumberFormat
-from phonenumbers import format_number
-from phonenumbers import country_code_for_region
 
 
 def format_currency_brl(value) -> str:

@@ -1,75 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Projeto Adm.Procs</title>
+    <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.7.1.js"
-        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/img/favicon.ico') }}" type="image/x-icon">
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Font-Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"
+      integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Styles -->
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-</head>
 
-<body class="bg-purple bg-opacity-0">
+  </head>
+
+  <body class="bg-purple bg-opacity-0">
     <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            <main>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-5">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Login</h3>
-                                </div>
-                                <div class="card-body">
-                                    <form action="{{ url_for('auth.login') }}" method="POST">
-                                        {{ form.hidden_tag() }}
+      <div id="layoutAuthentication_content">
+        <main>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-lg-5">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                  <div class="card-header">
+                    <h3 class="text-center font-weight-light my-4">Login</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="{{ url_for('auth.login') }}" method="POST">
+                      {{ form.hidden_tag() }}
 
-                                        <div class="form-floating mb-3">
-                                            {{ form.login(class="form-control", id="login", placeholder="...") }}
-                                            {{ form.login.label(for="login") }}
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            {{ form.password(class="form-control", id="password", placeholder="...") }}
-                                            {{ form.password.label(for="password") }}
-                                        </div>
-                                        <hr>
-                                        <div class="d-grid gap-3">
-                                            {{ form.submit(class="btn btn-primary") }}
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                      <div class="form-floating mb-3">
+                        {{ form.login(class="form-control", id="login", placeholder="...") }}
+                        {{ form.login.label(for="login") }}
+                      </div>
+                      <div class="form-floating mb-3">
+                        {{ form.password(class="form-control", id="password", placeholder="...") }}
+                        {{ form.password.label(for="password") }}
+                      </div>
+                      <hr>
+                      <div class="d-grid gap-3">
+                        {{ form.submit(class="btn btn-primary") }}
+                      </div>
+                    </form>
+                  </div>
                 </div>
-            </main>
-        </div>
-        <div id="layoutAuthentication_footer">
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div id="layoutAuthentication_footer">
+        <footer class="py-4 bg-light mt-auto">
+          <div class="container-fluid px-4">
+            <div class="d-flex align-items-center justify-content-between small">
+              <div class="text-muted">Copyright &copy; Your Website 2023</div>
+              <div>
+                <a href="#">Privacy Policy</a>
+                &middot;
+                <a href="#">Terms &amp; Conditions</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
     </div>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -77,6 +89,6 @@
     {% endif %}
     {% endwith %}
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-</body>
+  </body>
 
 </html>

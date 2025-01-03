@@ -124,10 +124,9 @@ class AppFactory:
             app (Flask): The Flask application instance to register blueprints with.
         """
 
-        from app.routes import auth, dash, index
+        from .routes import register_blueprints
 
-        for bp in [auth, index, dash]:
-            app.register_blueprint(bp)
+        register_blueprints(app)
 
     def init_database(self, app: Flask, db: SQLAlchemy):
         """
@@ -144,14 +143,14 @@ class AppFactory:
             db (SQLAlchemy): The SQLAlchemy database instance.
         """
 
-        from app.models import init_database
+        from .models import init_database
 
         if not Path("is_init.txt").exists():
 
             with open("is_init.txt", "w") as f:
                 f.write(f"{init_database(app, db)}")
 
-        from app.models import Users
+        from .models import Users
 
         if not db.engine.dialect.has_table(db.engine.connect(), Users.__tablename__):
             with open("is_init.txt", "w") as f:

@@ -1,23 +1,23 @@
+from datetime import datetime
+
+import pytz
 from flask_wtf import FlaskForm
 from wtforms import (
-    StringField,
-    DateField,
-    SubmitField,
-    SelectField,
-    EmailField,
     BooleanField,
+    DateField,
+    EmailField,
+    SelectField,
+    StringField,
+    SubmitField,
 )
 from wtforms.validators import DataRequired
 
-import pytz
-from datetime import datetime
+from app.models import Assuntos, Classes, Clientes, Foros, Juizes, Partes, Varas
 
-# from app.Forms.proc_adm.defaults import bairros_manaus, cidades_amazonas
+# from app.forms.proc_adm.defaults import bairros_manaus, cidades_amazonas
 
 # import string
 # import random
-
-from app.models import Partes, Clientes, Classes, Foros, Juizes, Varas, Assuntos
 
 
 class SearchProc(FlaskForm):

@@ -1,28 +1,42 @@
 [tool.poetry]
-name = "project-gestaoprocessual"
-version = "0.1.0"
-description = ""
+name = "cob-admin"
+version = "0.0.1-alpha"
+description = "Sistema de Gerenciamento de Cobranças Administrativas"
 authors = ["Robotz213 <nicholas@robotz.dev>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
-python = "3.12.7"
-iso3166 = "^2.1.1"
+python = "^3.12"
 flask = "^3.1.0"
-flask-login = "^0.6.3"
-flask-sqlalchemy = "^3.1.1"
-flask-talisman = "^1.1.0"
-flask-cloudflared = "^0.0.14"
 flask-wtf = "^1.2.2"
+flask-sqlalchemy = "^3.1.1"
+flask-login = "^0.6.3"
+flask-talisman = "^1.1.0"
+pandas = "^2.2.3"
+openpyxl = "^3.1.5"
+psycopg2 = "^2.9.10"
+psycopg2-binary = "^2.9.10"
 python-dotenv = "^1.0.1"
-pytz = "^2024.2"
-babel = "^2.16.0"
+flask-mail = "^0.10.0"
 bcrypt = "^4.2.1"
-phonenumbers = "^8.13.50"
-eventlet = "^0.38.0"
+eventlet = "^0.38.2"
+clear = "^2.0.0"
+pytz = "^2024.2"
+httpx = "^0.28.1"
+babel = "^2.16.0"
+phonenumbers = "^8.13.52"
+iso3166 = "^2.1.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black" # Garante compatibilidade com Black
+line_length = 88  # O mesmo limite de linha do Black

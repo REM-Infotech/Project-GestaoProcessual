@@ -1,119 +1,120 @@
-<div class="container-fluid px-4">
-    <div class="card mt-4 mb-3">
-        <div class="card-header mb-3">
-            <h1 class="mb-3">{{ title }}</h1>
-            <hr>
-            <a href="{{ url_for('procs.cadastro') }}" class="btn btn-success mb-3">
-                <span class="icon text-white-50">
-                    <i class="fa-solid fa-plus"></i>
-                </span>
-                <span class="text">Cadastrar</span>
-            </a>
-            <button type="button" data-bs-toggle="modal" class="btn btn-warning mb-3" data-bs-target="#importarquivo">
-                <span class="icon text-white-50">
-                    <i class="fa-solid fa-file-import"></i>
-                </span>
-                <span class="text">Import em lotes</span>
-            </button>
-            <a href="#" class="btn btn-primary mb-3">
-                <span class="icon text-white-50">
-                    <i class="fa-solid fa-file-csv"></i>
-                </span>
-                <span class="text">Gerar Relatório</span>
-            </a>
-        </div>
-        <div class="card-body">
-            <div class="row g-3">
-
-                <div class="col-md-12">
-                    <form action="{{ url_for('procs.consulta') }}" method="post" name="formBusca" id="formBusca">
-                        {{ form.hidden_tag() }}
-                        <div class="row g-2">
-                            <div class="col-md-2">
-                                {{ form.tipoBusca(class="form-select", id="tipoBusca", placeholder="...") }}
-                            </div>
-                            <div class="col-md-8">
-                                {{ form.campo_busca(class="form-control", id="campoBusca", placeholder="Busque por...")
-                                }}
-                            </div>
-                            <div class="col-md-2">
-                                <div class="mb-3 d-grid gap-2">
-
-                                    {{ form.submit(class="btn btn-primary btn-md h-100") }}
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-
-
-                </div>
-                <hr>
-                <div class="col-md-12">
-                    <div class="table-responsive mb-3">
-                        <table class="table table-striped" id="DataTable">
-                            <thead>
-                                <tr role="row">
-                                    <th>#</th>
-                                    <th>N. Processo</th>
-                                    <th>Parte Contrária</th>
-                                    <th>Cliente</th>
-                                    <th>Data Cadastro</th>
-                                    <th>Valor Da Causa</th>
-                                    <th data-sortable="false">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% if database %}
-                                {% for item in database %}
-                                <tr>
-                                    <td>{{ item.id }}</td>
-                                    <td>{{ item.numproc }}</td>
-                                    <td>{{ item.parte_contraria }}</td>
-                                    <td>{{ item.cliente }}</td>
-                                    <td>{{ item.data_cadastro.strftime('%d/%m/%Y') }}</td>
-                                    <td>{{ format_currency_brl(item.valor_causa).replace("\\xa", "") }}</td>
-                                    <td>
-                                        <button type="button" id="DeleteEpiButton" class="btn btn-danger btn-sm mb-2"
-                                            hx-post="#!" hx-trigger="click" hx-target="#results">
-                                            <span class="icon text-white-50">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </span>
-                                            <span class="text">Deletar</span>
-                                        </button>
-                                        <a href="{{ url_for('procs.editar', id=item.id) }}"
-                                            class="btn btn-warning btn-sm mb-2">
-                                            <span class="icon text-white-50">
-                                                <i class="fa-solid fa-pen"></i>
-                                            </span>
-                                            <span class="text">Editar</span>
-                                        </a>
-                                        <a href="#!" class="btn btn-primary btn-sm mb-2">
-                                            <span class="icon text-white-50">
-                                                <i class="fa-solid fa-list-check"></i>
-                                            </span>
-                                            <span class="text text-white">Andamentos</span>
-                                        </a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                                {% endif %}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>#</th>
-                                    <th>N. Processo</th>
-                                    <th>Parte Contrária</th>
-                                    <th>Cliente</th>
-                                    <th>Data Cadastro</th>
-                                    <th>Valor Da Causa</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container px-4">
+  <div class="card mt-4 mb-3">
+    <div class="card-header mb-3">
+      <h1 class="mb-3">{{ title }}</h1>
+      <hr>
+      <a href="{{ url_for('procs.cadastro') }}" class="btn btn-success btn-icon-split m-1">
+        <span class="icon text-white-50">
+          <i class="fa-solid fa-plus"></i>
+        </span>
+        <span class="text">Cadastrar</span>
+      </a>
+      <button type="button" data-bs-toggle="modal" class="btn btn-secondary btn-icon-split m-1"
+        data-bs-target="#importarquivo">
+        <span class="icon text-white-50">
+          <i class="fa-solid fa-file-import"></i>
+        </span>
+        <span class="text">Import em lotes</span>
+      </button>
+      <a href="#" class="btn btn-primary btn-icon-split m-1">
+        <span class="icon text-white-50">
+          <i class="fa-solid fa-file-csv"></i>
+        </span>
+        <span class="text">Gerar Relatório</span>
+      </a>
     </div>
+    <div class="card-body">
+      <div class="row g-3">
+
+        <div class="col-md-12">
+          <form action="{{ url_for('procs.consulta') }}" method="post" name="formBusca" id="formBusca">
+            {{ form.hidden_tag() }}
+            <div class="row g-2">
+              <div class="col-md-2">
+                {{ form.tipoBusca(class="form-select", id="tipoBusca", placeholder="...") }}
+              </div>
+              <div class="col-md-8">
+                {{ form.campo_busca(class="form-control", id="campoBusca", placeholder="Busque por...")
+                                }}
+              </div>
+              <div class="col-md-2">
+                <div class="mb-3 d-grid gap-2">
+
+                  {{ form.submit(class="btn btn-primary btn-md h-100") }}
+                </div>
+              </div>
+            </div>
+
+          </form>
+
+
+        </div>
+        <hr>
+        <div class="col-md-12">
+          <div class="table-responsive mb-3">
+            <table class="table table-striped" id="DataTable">
+              <thead>
+                <tr role="row">
+                  <th>#</th>
+                  <th>N. Processo</th>
+                  <th>Parte Contrária</th>
+                  <th>Cliente</th>
+                  <th>Data Cadastro</th>
+                  <th>Valor Da Causa</th>
+                  <th data-sortable="false">Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if database %}
+                {% for item in database %}
+                <tr>
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.numproc }}</td>
+                  <td>{{ item.parte_contraria }}</td>
+                  <td>{{ item.cliente }}</td>
+                  <td>{{ item.data_cadastro.strftime('%d/%m/%Y') }}</td>
+                  <td>{{ format_currency_brl(item.valor_causa).replace("\\xa", "") }}</td>
+                  <td>
+                    <button type="button" id="DeleteEpiButton" class="btn btn-danger btn-icon-split btn-sm mb-2"
+                      hx-post="#!" hx-trigger="click" hx-target="#results">
+                      <span class="icon text-white-50">
+                        <i class="fa-solid fa-trash"></i>
+                      </span>
+                      <span class="text">Deletar</span>
+                    </button>
+                    <a href="{{ url_for('procs.editar', id=item.id) }}"
+                      class="btn btn-danger btn-icon-split btn-sm mb-2">
+                      <span class="icon text-white-50">
+                        <i class="fa-solid fa-pen"></i>
+                      </span>
+                      <span class="text">Editar</span>
+                    </a>
+                    <a href="#!" class="btn btn-primary btn-sm mb-2">
+                      <span class="icon text-white-50">
+                        <i class="fa-solid fa-list-check"></i>
+                      </span>
+                      <span class="text text-white">Andamentos</span>
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th>#</th>
+                  <th>N. Processo</th>
+                  <th>Parte Contrária</th>
+                  <th>Cliente</th>
+                  <th>Data Cadastro</th>
+                  <th>Valor Da Causa</th>
+                  <th>Ações</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

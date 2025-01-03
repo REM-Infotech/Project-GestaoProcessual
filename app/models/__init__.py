@@ -1,63 +1,68 @@
+from uuid import uuid4
+
+from dotenv import dotenv_values
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from app.models.adm import (
-    Processos,
-    Partes,
-    Clientes,
-    Classes,
-    Foros,
-    Varas,
-    Juizes,
-    Assuntos,
-)
-from app.models.users import Users, Group, Permission
-
-import os
-
-from uuid import uuid4
+from .adm import Assuntos, Classes, Clientes, Foros, Juizes, Partes, Processos, Varas
+from .secondaries import admins
+from .users import LicensesUsers, SuperUser, Users
 
 __all__ = [
-    Processos,
-    Partes,
-    Clientes,
-    Classes,
-    Foros,
-    Varas,
-    Juizes,
-    Assuntos,
+    admins,
     Users,
-    Group,
-    Permission,
+    LicensesUsers,
+    SuperUser,
+    Assuntos,
+    Classes,
+    Clientes,
+    Foros,
+    Juizes,
+    Partes,
+    Varas,
+    Processos,
 ]
 
 
 def init_database(app: Flask, db: SQLAlchemy) -> str:
 
-    with app.app_context():
-
+    try:
+        values = dotenv_values()
         db.create_all()
+        loginsys = values.get("loginsys")
+        nomeusr = values.get("nomeusr")
+        emailusr = values.get("emailusr")
+        passwd = values.get("passwd", str(uuid4()))
 
-        usr = Users.query.filter_by(login="root").first()
+        dbase = Users.query.filter(Users.login == loginsys).first()
+        if not dbase:
 
-        if usr is None:
+            user = Users(login=loginsys, nome_usuario=nomeusr, email=emailusr)
+            user.senhacrip = passwd
 
-            filename = "favicon.ico"
-            path_img = os.path.join("app/src/assets/img", filename)
-            with open(path_img, "rb") as file:
-                blob_doc = file.read()
-            usr = Users(
-                login="root",
-                nome_usuario="Root",
-                email="adm@robotz.dev",
-                blob_doc=blob_doc,
-                filename=filename,
-            )
+            license_user = LicensesUsers.query.filter(
+                LicensesUsers.name_client == "Robotz Dev"
+            ).first()
 
-            root_pw = str(uuid4())
-            usr.senhacrip = root_pw
+            if not license_user:
 
-        db.session.add(usr)
-        db.session.commit()
+                license_user = LicensesUsers(
+                    name_client="Robotz Dev",
+                    cpf_cnpj="55607848000175",
+                    license_token=str(uuid4()),
+                )
 
-    return f" * Root Pw: {root_pw}"
+            user.licenseusr = license_user
+            license_user.admins.append(user)
+            super_user = SuperUser()
+
+            super_user.users = user
+
+            db.session.add(user)
+            db.session.add(license_user)
+            db.session.commit()
+
+            return f" * Root Pw: {passwd}"
+
+    except Exception as e:
+        raise e

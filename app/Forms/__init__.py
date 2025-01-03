@@ -1,5 +1,5 @@
-from app.Forms.auth.login import LoginForm
-from app.Forms.proc_adm import SearchProc, ProcessoForm, PessoaForm, clienteForm
+from .auth import LoginForm
+from .proc_adm import PessoaForm, ProcessoForm, SearchProc, clienteForm
 
 __all__ = [
     LoginForm,

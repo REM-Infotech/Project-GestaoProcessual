@@ -93,7 +93,7 @@ bairros_manaus = [
     ("VILA BURITI", "VILA BURITI"),
     ("VILA DA PRATA", "VILA DA PRATA"),
     ("ZONA RURAL", "ZONA RURAL"),
-    ("ZUMBI DOS PALMARES", "ZUMBI DOS PALMARES")
+    ("ZUMBI DOS PALMARES", "ZUMBI DOS PALMARES"),
 ]
 
 cidades_amazonas = [
@@ -158,5 +158,5 @@ cidades_amazonas = [
     ("Tonantins", "Tonantins"),
     ("Uarini", "Uarini"),
     ("Urucará", "Urucará"),
-    ("Urucurituba", "Urucurituba")
+    ("Urucurituba", "Urucurituba"),
 ]

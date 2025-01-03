@@ -1,6 +1,8 @@
 from datetime import datetime
-from app import db
+
 import pytz
+
+from app import db
 
 
 class Processos(db.Model):
