@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "cob-admin"
+name = "project_admin_proc"
 version = "0.0.1-alpha"
 description = "Sistema de Gerenciamento de Cobranças Administrativas"
 authors = ["Robotz213 <nicholas@robotz.dev>"]
